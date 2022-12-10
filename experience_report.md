@@ -1,0 +1,5 @@
+# Experience Report
+
+I had a generally good experience extending Coding Method University's framework. Adding my plugins to the framework went very smoothly. The team left instructions in their README file that were clear and easy to follow, and the sample plugins that they provided were useful for resolving any questions I had about how to write my plugins. Their interfaces were very simple and straightforward to implement.
+
+The team also seemed to be good with addressing Github issues in their repository. While developing my data plugin, I was originally a little unclear on what to do if I couldn't get data for all of the fields in the `Course` interface. However, I was easily able to find an answer to my question in [this Github issue thread](https://github.com/CMU-17-214/hw6-coding-method-university-public/issues/5). I noticed that in their responses, the team was also good with addressing duplicate questions by referring back to earlier answers.
