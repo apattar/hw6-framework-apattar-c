@@ -6,7 +6,7 @@ Clone Coding Method University's framework code from [this repository](https://g
 
 ### Codecademy Data Plugin
 
-My data plugin retrieves course information from the [Codecademy website](codecademy.com) using web scraping. To install it, do the following:
+My data plugin retrieves course information from the [Codecademy website](https://www.codecademy.com/) using web scraping. To install it, do the following:
 
 1. Add the `CodecademyPlugin.java` file from this folder to the `backend/src/main/java/edu/cmu/cs/cs214/analyzer/plugin` directory.
 
@@ -29,11 +29,13 @@ My new visualization plugin displays course information in a sortable and filter
 
 1. Add the `TableVisualizer.tsx` and `tabulator.css` files from this folder into the `frontend/src/plugin/` directory.
 
-2. Finally, in `frontend/src/plugins.txt`, add a new line with the text "TableVisualizer".
+2. In `frontend/src/plugins.txt`, add a new line with the text "TableVisualizer".
 
 3. In `frontend/package.json`, add the following line under `"dependencies"`:
 ```javascript
 "react-tabulator": "^0.18.1",
 ```
+
+4. Make sure to run `npm install` before starting the frontend server.
 
 The visualization plugin should now show up when starting the program!
