@@ -32,9 +32,9 @@ interface VisualizerState {
 }
 
 const courseColumns = [
-    { title: "Row #", field: "rowNum" },
-    { title: "Course Name", field: "name" },
-    { title: "Description", field: "description", },
+    { title: "Row #", field: "rowNum", },
+    { title: "Course Name", field: "name", },
+    { title: "Description", field: "description", formatter: "textarea" as const, width: 300, },
     { title: "Instructors", field: "instructorNames", },
     { title: "Organization", field: "organizationName", },
     { title: "Category", field: "category", },
@@ -165,7 +165,6 @@ class Visualizer extends React.Component<{}, VisualizerState> {
         })
     }
     nextPage = (evt : any): void => {
-        console.log(this.state)
         if (this.state.rowsStart + this.state.rowsPerPage >= this.state.allCourses.length) return;
         else this.setState((prevState) => {
             return {

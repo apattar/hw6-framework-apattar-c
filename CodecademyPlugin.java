@@ -11,7 +11,7 @@ import edu.cmu.cs.cs214.analyzer.framework.core.Course;
 import edu.cmu.cs.cs214.analyzer.framework.core.DataPlugin;
 
 public class CodecademyPlugin implements DataPlugin {
-    final private int NUM_COURSES = 100;  /* <= 252 */
+    final private int NUM_COURSES = 30;  /* <= 252 */
 
     @Override
     public String getName() {
@@ -31,7 +31,7 @@ public class CodecademyPlugin implements DataPlugin {
         for (int i = 0; i < NUM_COURSES; i++) {
             try {
                 courses.add(retrieveCourse(urls.get(i)));
-                System.out.println(i + "/" + NUM_COURSES + " Retrieved course at " + urls.get(i));
+                System.out.println((i+1) + "/" + NUM_COURSES + " Retrieved course at " + urls.get(i));
             } catch (IOException e) {
                 System.out.println("Failed to retrieve course - " + urls.get(i));
             }
@@ -59,25 +59,40 @@ public class CodecademyPlugin implements DataPlugin {
         course.organizationName = "Codecademy";
         course.year = 2022;
         
-        course.id = 1;
+        course.id = -1;
         course.instructorNames = new ArrayList<>();
         course.instructorNames.add("Codecademy Team");
         course.category = "";
-        course.totalStudents = 1;
-        course.totalWeeks = 1;
-        course.estimatedWorkload = 1;
-        course.rate = 1;
-        course.price = 1;
+        course.totalWeeks = -1;
+        course.estimatedWorkload = -1;
+        course.rate = -1;
+        course.price = -1;
         course.reviews = new ArrayList<>();
 
         Elements paragraphs = document.select("p");
         course.description = paragraphs.first().text();
-        course.level = paragraphs.get(1).nextElementSibling().text();
 
-        try {
-            course.totalHours = Integer.parseInt(paragraphs.get(2).nextElementSibling().text().replaceAll("[\\D]", ""));
-        } catch (Exception e) {
-            course.totalHours = 1;
+        String belowFirstPar = paragraphs.get(1).nextElementSibling().text();
+        if (belowFirstPar.matches(".*[0-9].*")) {
+            course.level = "";
+            try {
+                course.totalStudents = Integer.parseInt(belowFirstPar.replaceAll("[\\D]", ""));
+            } catch (Exception e) {
+                course.totalStudents = -1;
+            }
+            try {
+                course.totalHours = Integer.parseInt(paragraphs.get(3).text().replaceAll("[\\D]", ""));
+            } catch (Exception e) {
+                course.totalHours = -1;
+            }
+        } else {
+            course.level = belowFirstPar;
+            try {
+                course.totalHours = Integer.parseInt(paragraphs.get(2).nextElementSibling().text().replaceAll("[\\D]", ""));
+            } catch (Exception e) {
+                course.totalHours = -1;
+            }
+            course.totalStudents = -1;
         }
 
         return course;
